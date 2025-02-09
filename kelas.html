@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahfidz App</title>
+    <link rel="icon" type="image/svg+xml" href="https://flashsoftindonesia.com/assets/flashsoft-BpcpxBBw.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Link to Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- Optional: Add custom styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0px;
+            padding-bottom: 60px;
+            /* Space for the bottom navigation */
+            background-color: #f5f5f5;
+        }
+
+        .content {
+            margin-left: 370px;
+            /* Sesuaikan dengan sidebar */
+            padding: 20px 20px 20px 70px;
+            flex: 1;
+            background-color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 20%;
+            padding-top: 20px;
+            display: none;
+        } */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #FFC94A;
+            padding-top: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            transition: width 0.3s;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .navbar,
+        .sidebar {
+            background-color: #FFC94A;
+        }
+
+        .navbar button,
+        .sidebar button {
+            color: white;
+        }
+
+
+
+        .sidebar button {
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+        }
+
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #ddd;
+            padding: 10px 0;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        .bottom-navbar .nav-item button {
+            border: none;
+            background: none;
+            color: #795458;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bottom-navbar .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .thin {
+            font-weight: normal;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .text-primary {
+            color: #795458 !important;
+        }
+
+        .kec {
+            overflow-x: auto;
+        }
+
+        .kec-container {
+            overflow-x: scroll;
+            /* Gaya tambahan untuk container jika diperlukan */
+            white-space: nowrap;
+            /* Mencegah teks otomatis pindah ke baris baru */
+        }
+
+        .nav {
+            padding: 3%;
+        }
+
+        .nav-link {
+            border-radius: 10px;
+            margin-bottom: 10px;
+            padding: 7%;
+        }
+
+        .nav>.active {
+            background: #FFFFFF;
+        }
+
+        .nav-link i {
+            margin-right: 7px;
+        }
+
+        @media (min-width: 768px) {
+            .navbar {
+                display: none;
+            }
+
+            .sidebar {
+                display: block;
+            }
+
+            .content {
+                margin-left: 200px;
+            }
+
+            .bottom-navbar {
+                display: none;
+            }
+
+            .container-fluid {
+                display: fle;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .sidebar {
+                display: none;
+            }
+
+            .bottom-navbar .row {
+                padding: 1% 3%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .content {
+                margin-left: 0px;
+                padding-left: 3%;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar for Desktop -->
+    <div class="sidebar d-flex flex-column d-none d-md-block">
+        <h4 class="text-left py-2 ps-3"><i class="fab fa-dashcube me-2"></i>Tahfidz App</h4>
+        <nav class="nav flex-column">
+            <a class="nav-link text-black" href="index.html"><i class="fas fa-square"></i>Dashboard</a>
+            <a class="nav-link text-black " href="guru.html"><i class="fas fa-user-cog"></i>Data Guru</a>
+            <a class="nav-link text-black " href="wali.html"><i class="fas fa-user-circle"></i>Data Orang Tua</a>
+            <a class="nav-link text-black" href="siswa.html"><i class="fas fa-user-check"></i>Data Siswa</a>
+            <a class="nav-link text-black active" href="kelas.html"><i class="fab fa-buromobelexperte"></i>Data
+                Kelas</a>
+            <a class="nav-link text-black" href="inventaris.html"><i class="fas fa-box"></i>Data Inventaris</a><a
+                class="nav-link text-black" href="hafalan.html"><i class="fas fa-quran"></i>Hafalan Qur'an</a>
+            <a class="nav-link text-black" href="silabus.html"><i class="fas fa-quran"></i>Silabus</a>
+            <a class="nav-link text-black" href="index.html"><i class="fas fa-circle"></i>Logout</a>
+        </nav>
+    </div>
+
+    <div class="content">
+        <h1 class="text-start mt-1 text-primary d-flex">
+            <span class="fs-2 thin">Data Kelas</span>
+            <button type="button" class="btn btn-warning ms-auto" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                Tambah
+            </button>
+        </h1>
+
+        <section>
+            <div class="row p-3">
+                <!-- Kelas 1 -->
+                <div class="card p-3 mb-2" style="border-radius: 25px;">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-6 col-md-3"><label class="text-secondary">Nama Kelas</label>
+                                    <h5>10 IPA 1</h5>
+                                </div>
+                                <div class="col-6 col-md-3"><label class="text-secondary">Wali Kelas</label>
+                                    <h5>Bu Siti Aisyah</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Jumlah Siswa</label>
+                                    <h5>35</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Tahun Ajaran</label>
+                                    <h5>2024/2025</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Ruang</label>
+                                    <h5>101</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kelas 2 -->
+                <div class="card p-3 mb-2" style="border-radius: 25px;">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-6 col-md-3"><label class="text-secondary">Nama Kelas</label>
+                                    <h5>10 IPS 2</h5>
+                                </div>
+                                <div class="col-6 col-md-3"><label class="text-secondary">Wali Kelas</label>
+                                    <h5>Pak Budi Santoso</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Jumlah Siswa</label>
+                                    <h5>32</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Tahun Ajaran</label>
+                                    <h5>2024/2025</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Ruang</label>
+                                    <h5>102</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kelas 3 -->
+                <div class="card p-3 mb-2" style="border-radius: 25px;">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-6 col-md-3"><label class="text-secondary">Nama Kelas</label>
+                                    <h5>11 IPA 1</h5>
+                                </div>
+                                <div class="col-6 col-md-3"><label class="text-secondary">Wali Kelas</label>
+                                    <h5>Bu Dewi Susanti</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Jumlah Siswa</label>
+                                    <h5>33</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Tahun Ajaran</label>
+                                    <h5>2024/2025</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Ruang</label>
+                                    <h5>201</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kelas 4 -->
+                <div class="card p-3 mb-2" style="border-radius: 25px;">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-6 col-md-3"><label class="text-secondary">Nama Kelas</label>
+                                    <h5>11 IPS 2</h5>
+                                </div>
+                                <div class="col-6 col-md-3"><label class="text-secondary">Wali Kelas</label>
+                                    <h5>Pak Ahmad Fauzi</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Jumlah Siswa</label>
+                                    <h5>30</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Tahun Ajaran</label>
+                                    <h5>2024/2025</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Ruang</label>
+                                    <h5>202</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kelas 5 -->
+                <div class="card p-3 mb-2" style="border-radius: 25px;">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col-6 col-md-3"><label class="text-secondary">Nama Kelas</label>
+                                    <h5>12 IPA 3</h5>
+                                </div>
+                                <div class="col-6 col-md-3"><label class="text-secondary">Wali Kelas</label>
+                                    <h5>Bu Rina Kartika</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Jumlah Siswa</label>
+                                    <h5>31</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Tahun Ajaran</label>
+                                    <h5>2024/2025</h5>
+                                </div>
+                                <div class="col-6 col-md-2"><label class="text-secondary">Ruang</label>
+                                    <h5>301</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div class="modal modal-sm fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah Transaksi</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Mitra</label>
+                        <select class="form-control">
+                            <option value="">Pilih Mitra</option>
+                            <option>Ilham Fauzi</option>
+                            <option>Supriadi</option>
+                            <option>Dede Handoco</option>
+                            <option>Ramadhani</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Berat (Ton)</label>
+                        <input class="form-control" type="text" value="0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Jumlah</label>
+                        <input class="form-control" type="text" value="0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Harga</label>
+                        <input class="form-control" type="text" value="0">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileDisabled" class="form-label">Tanggal</label>
+                        <input class="form-control" type="date" id="formFileDisabled">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation for Mobile -->
+    <nav class="bottom-navbar">
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                <div class="col-3 nav-item">
+                    <a class="btn" href="index.html">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                </div>
+                <div class="col-3 nav-item">
+                    <a class="btn" href="transaksi.html">
+                        <i class="fas fa-receipt"></i>
+                        Transaksi
+                    </a>
+                </div>
+                <div class="col-3 nav-item">
+                    <a class="btn" href="hutang.html">
+                        <i class="fas fa-money-bill"></i>
+                        Hutang
+                    </a>
+                </div>
+                <div class="col-3 nav-item">
+                    <a class="btn" href="#">
+                        <i class="far fa-user-circle"></i>
+                        Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</body>
+
+</html>
